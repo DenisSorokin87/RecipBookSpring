@@ -12,4 +12,8 @@ public class LoggedInUser {
     private Long id;
     private String userName;
 
+    public LoggedInUser(Long id, String userName) {
+        this.id = id;
+        this.userName = userName;
+    }
 }

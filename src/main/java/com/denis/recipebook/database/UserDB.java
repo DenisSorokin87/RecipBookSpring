@@ -4,26 +4,31 @@ import com.denis.recipebook.beans.User;
 import com.denis.recipebook.repositoresies.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Optional;
 
 public class UserDB {
 
     @Autowired
     private UserRepository userRepository;
 
-    public String addAllRecipes(List<User> userList) {
+    public Optional<User> getUser(int id){
+        return userRepository.findById(id);
+    }
 
-        userRepository.saveAll(userList);
+    public String updateUser(User user){
+        return "Updated";
+    }
+
+    public String createUser(User user){
+        userRepository.save(user);
         return "Saved";
     }
 
-    public List<User> getAllRecipes() {
-
-        Iterable<User> iterable = userRepository.findAll();
-        ArrayList<User> userList = new ArrayList<>();
-        iterable.forEach(userList::add);
-        return userList;
-
-    }
+//    public User makeLogin(String loginName, String password){
+//       return userRepository.makeLogin(loginName, password);
+//    }
+//
+//    public Boolean isUserExist(String loginName){
+//        return userRepository.isUserExist(loginName) != null;
+//    }
 }
