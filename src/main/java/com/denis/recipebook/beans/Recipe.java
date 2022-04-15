@@ -22,9 +22,9 @@ public class Recipe {
     private String type;
     private String description;
     private String dishName;
-    @Convert(converter = IngredientConverter.class)
+    @OneToMany(mappedBy = "recipe")
     private List<Ingredient> productsList;
-    @Convert(converter = CookingProcessConverter.class)
+    @OneToMany(mappedBy = "recipe")
     private List<CookingProcess> cookingProcessList;
     private String dishPhotoUrl;
 

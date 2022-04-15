@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 @RestController("/login")
 public class LoginAPI {
 
+
+
     @GetMapping("/SignIn")
     public LoggedInUser makeLogin(@RequestParam String loginName, @RequestParam String password){
         return new LoggedInUser();

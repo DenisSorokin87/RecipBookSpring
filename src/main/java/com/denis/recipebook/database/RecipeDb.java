@@ -1,5 +1,6 @@
 package com.denis.recipebook.database;
 
+import com.denis.recipebook.Creator;
 import com.denis.recipebook.beans.Recipe;
 import com.denis.recipebook.repositoresies.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,14 +12,17 @@ import java.util.List;
 @Component
 public class RecipeDb {
 
-    @Autowired
     private RecipeRepository recipeRepository;
 
+    @Autowired
+    public RecipeDb(RecipeRepository recipeRepository) {
+        this.recipeRepository = recipeRepository;
+    }
 
     public List<Recipe> getAllRecipes() {
         List<Recipe> recipesList = new ArrayList<>();
         recipeRepository.findAll().forEach(recipesList::add);
-        return recipesList;
+        return Creator.recipesList;
     }
 
 

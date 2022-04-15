@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.denis</groupId>
 	<artifactId>recipe-book</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>recipe-book</name>
 	<description>Recipe Book</description>
 	<properties>

@@ -6,21 +6,22 @@ import com.denis.recipebook.repositoresies.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "/check")
+@RequestMapping("/check")
 public class Check {
 
     @Autowired
     private RecipeRepository recipeRepository;
 
 
-    @GetMapping
-    public Iterable<Recipe> makeLogin(){
+    @GetMapping("/")
+    public Recipe makeLogin(){
         Creator.getInstance();
-        recipeRepository.saveAll(Creator.recipesList);
-        return recipeRepository.findAll();
+//        recipeRepository.saveAll(Creator.recipesList);
+        return Creator.recipesList.get(1);
     }
 
 

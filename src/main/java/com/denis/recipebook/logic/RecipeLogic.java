@@ -6,14 +6,20 @@ import com.denis.recipebook.database.RecipeDbInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 
 import java.util.Collections;
 import java.util.List;
 
+@Component
 public class RecipeLogic implements RecipeLogicInterface {
 
-//    @Autowired
-    private RecipeDb recipeDb = new RecipeDb();
+
+    private RecipeDb recipeDb;
+    @Autowired
+    public RecipeLogic(RecipeDb recipeDb) {
+        this.recipeDb = recipeDb;
+    }
 
     @Override
     public ResponseEntity<List<Recipe>> getAllRecipes() {
