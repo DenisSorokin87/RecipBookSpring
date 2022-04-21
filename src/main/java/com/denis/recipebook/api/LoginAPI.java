@@ -4,7 +4,8 @@ import com.denis.recipebook.beans.LoggedInUser;
 import com.denis.recipebook.beans.User;
 import org.springframework.web.bind.annotation.*;
 
-@RestController("/login")
+@RestController
+@RequestMapping("/login")
 public class LoginAPI {
 
 

@@ -15,7 +15,7 @@ public class RecipeBookApplication {
 		Creator.getInstance();
 		Creator.getRecipesList();
 		for (Recipe recipe : Creator.recipesList) {
-			System.out.println(recipe);
+			System.out.println(recipe.toString());
 		}
 
 

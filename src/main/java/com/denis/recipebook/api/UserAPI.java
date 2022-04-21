@@ -4,7 +4,8 @@ import com.denis.recipebook.api.response.Response;
 import com.denis.recipebook.beans.User;
 import org.springframework.web.bind.annotation.*;
 
-@RestController("/user")
+@RestController
+@RequestMapping("/user")
 public class UserAPI {
 
     @GetMapping("/getUserRecipes")

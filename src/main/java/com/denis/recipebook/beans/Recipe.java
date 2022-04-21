@@ -1,45 +1,40 @@
 package com.denis.recipebook.beans;
 
-import com.denis.recipebook.converters.CookingProcessConverter;
-import com.denis.recipebook.converters.IngredientConverter;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
 @Getter
 @Setter
+@ToString
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 public class Recipe {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int recipeId;
+    private Long recipeId;
     private String type;
     private String description;
     private String dishName;
-    @OneToMany(mappedBy = "recipe")
+    @OneToMany(targetEntity = Ingredient.class, cascade = CascadeType.ALL)
+    @ToString.Exclude
     private List<Ingredient> productsList;
-    @OneToMany(mappedBy = "recipe")
+    @OneToMany(targetEntity = CookingProcess.class, cascade = CascadeType.ALL)
+    @ToString.Exclude
     private List<CookingProcess> cookingProcessList;
     private String dishPhotoUrl;
 
-    public Recipe(int recipeId, String type, String description, String dishName, List<Ingredient> productsList, List<CookingProcess> cookingProcessList, String dishPhotoUrl) {
-        this.recipeId = recipeId;
-        this.type = type;
-        this.description = description;
-        this.dishName = dishName;
-        this.productsList = productsList;
-        this.cookingProcessList = cookingProcessList;
-        this.dishPhotoUrl = dishPhotoUrl;
-    }
-
-    public int getRecipeId() {
-        return recipeId;
-    }
-
+//    public Recipe(String type, String description, String dishName, List<Ingredient> productsList, List<CookingProcess> cookingProcessList, String dishPhotoUrl) {
+//        this.type = type;
+//        this.description = description;
+//        this.dishName = dishName;
+//        this.productsList = productsList;
+//        this.cookingProcessList = cookingProcessList;
+//        this.dishPhotoUrl = dishPhotoUrl;
+//    }
 }
