@@ -7,26 +7,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.Optional;
 
-public class UserDB {
+public record UserDB(UserRepository userRepository) {
 
     @Autowired
-    private UserRepository userRepository;
+    public UserDB {
+    }
 
-    public Optional<User> getUser(long id){
+    public Optional<User> getUser(long id) {
         return userRepository.findById((long) id);
     }
 
 
-    public Boolean saveUser(User user){
+    public Boolean saveUser(User user) {
         userRepository.save(user);
         return true;
     }
 
-    public User makeLogin(String loginName, String password){
-       return userRepository.makeLogin(loginName, password);
+    public User makeLogin(String loginName, String password) {
+        return userRepository.makeLogin(loginName, password);
     }
 
-    public Boolean isUserExist(String loginName){
+    public Boolean isUserExist(String loginName) {
         return userRepository.isUserExist(loginName) != null;
     }
 

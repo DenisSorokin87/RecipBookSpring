@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-public class LoginLogic {
+public record LoginLogic(UserDB userDB) {
 
     @Autowired
-    private UserDB userDB;
+    public LoginLogic {
+    }
+    
 
     public ResponseEntity<LoggedInUser> makeLogin(String loginName, String password) {
         User user = userDB.makeLogin(loginName, password);
@@ -25,7 +27,7 @@ public class LoginLogic {
         }
     }
 
-    public Boolean isUserExist(String loginName){
+    public Boolean isUserExist(String loginName) {
         return userDB.isUserExist(loginName);
     }
 }

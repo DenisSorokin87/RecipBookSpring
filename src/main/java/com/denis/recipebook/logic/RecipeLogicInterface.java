@@ -10,6 +10,10 @@ public interface RecipeLogicInterface {
 
     ResponseEntity<List<Recipe>> getAllRecipes();
 
-    ResponseEntity<HttpStatus> addAllRecipes(List<Recipe> recipeList);
+    ResponseEntity<Recipe> addRecipe(Recipe recipe);
+
+    ResponseEntity<List<Recipe>> addAllRecipes(List<Recipe> recipeList);
+
+
 
 }

@@ -10,13 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class RecipeDb {
-
-    private RecipeRepository recipeRepository;
+public record RecipeDb(RecipeRepository recipeRepository) {
 
     @Autowired
-    public RecipeDb(RecipeRepository recipeRepository) {
-        this.recipeRepository = recipeRepository;
+    public RecipeDb {
     }
 
     public List<Recipe> getAllRecipes() {
@@ -26,15 +23,14 @@ public class RecipeDb {
     }
 
 
-    public Boolean addNewRecipe(Recipe recipe) {
-        recipeRepository.save(recipe);
-        return true;
+    public Recipe addNewRecipe(Recipe recipe) throws Exception {
+        return recipeRepository.save(recipe);
     }
 
 
-    public Boolean addAll(List<Recipe> recipeList) {
-        recipeRepository.saveAll(recipeList);
-        return true;
+    public Iterable<Recipe> addAll(List<Recipe> recipeList) {
+        return recipeRepository.saveAll(recipeList);
+
     }
 
 

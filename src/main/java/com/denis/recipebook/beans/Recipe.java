@@ -3,7 +3,6 @@ package com.denis.recipebook.beans;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -31,12 +30,4 @@ public class Recipe {
     private List<CookingProcess> cookingProcessList;
     private String dishPhotoUrl;
 
-//    public Recipe(String type, String description, String dishName, List<Ingredient> productsList, List<CookingProcess> cookingProcessList, String dishPhotoUrl) {
-//        this.type = type;
-//        this.description = description;
-//        this.dishName = dishName;
-//        this.productsList = productsList;
-//        this.cookingProcessList = cookingProcessList;
-//        this.dishPhotoUrl = dishPhotoUrl;
-//    }
 }
