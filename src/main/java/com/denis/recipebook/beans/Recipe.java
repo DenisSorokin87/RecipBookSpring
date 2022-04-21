@@ -22,9 +22,11 @@ public class Recipe {
     private String description;
     private String dishName;
     @OneToMany(targetEntity = Ingredient.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "ri_fk", referencedColumnName = "recipeId")
     @ToString.Exclude
     private List<Ingredient> productsList;
     @OneToMany(targetEntity = CookingProcess.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "rc_fk", referencedColumnName = "recipeId")
     @ToString.Exclude
     private List<CookingProcess> cookingProcessList;
     private String dishPhotoUrl;
