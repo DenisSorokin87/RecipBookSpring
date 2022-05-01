@@ -1,10 +1,8 @@
 package com.denis.recipebook.api;
 
-import com.denis.recipebook.beans.CookingProcess;
-import com.denis.recipebook.beans.Ingredient;
-import com.denis.recipebook.beans.IngredientAmountUnit;
-import com.denis.recipebook.beans.Recipe;
+import com.denis.recipebook.beans.*;
 import com.denis.recipebook.repositoresies.RecipeRepository;
+import com.denis.recipebook.repositoresies.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,10 +21,13 @@ public class Check {
     @Autowired
     private RecipeRepository recipeRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
 
     @GetMapping
     @ResponseBody
-    public ResponseEntity<List<Recipe>> makeLogin() {
+    public ResponseEntity<List<User>> makeLogin() {
 //        Recipe recipe = new Recipe(0L, "Bakery", "Very tasty Meat Cake", "Meat Cake", new ArrayList<>(), new ArrayList<>(), "photo url");
 //        Recipe recipe1 = new Recipe(0L, "Soup", "Chicken soup", "Chicken Soup", new ArrayList<Ingredient>(), new ArrayList<CookingProcess>(), "photo url");
 //        CookingProcess cookingProcess = new CookingProcess(0L, 1, "Take meat and cut it ");
@@ -35,9 +36,24 @@ public class Check {
 //        recipe.getProductsList().add(ingredient);
 //        recipeRepository.save(recipe);
 
-        return new ResponseEntity<>((List<Recipe>) recipeRepository.findAll(), HttpStatus.OK);
+        User user = new User();
+        user.setUserId(0);
+        user.setName("Denis");
+        user.setLastName("Sorokin");
+        user.setLoginName("DenSor");
+        user.setPassword("12345");
+        user.setRecipesIDs(new ArrayList<>());
+        user.getRecipesIDs().add(1);
+        user.getRecipesIDs().add(2);
+
+        userRepository.save(user);
+
+        return new ResponseEntity<>(userRepository.findAll(), HttpStatus.OK);
 
     }
+
+
+
 
 
 }

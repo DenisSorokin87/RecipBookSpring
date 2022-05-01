@@ -7,12 +7,12 @@ import org.springframework.data.jpa.repository.Query;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query(value =
-            "SELECT * FROM user u WHERE u.loginName = ?1 and u.password = ?2",
+            "SELECT * FROM user u WHERE login_Name = :loginName and password = :password",
             nativeQuery = true)
     User makeLogin(String loginName, String password);
 
-    @Query(value = "SELECT u FROM user u WHERE u.loginName = 1?",
+    @Query(value = "SELECT * FROM user u WHERE login_Name = :loginName",
             nativeQuery = true)
-    Boolean isUserExist(String loginName);
+    User isUserExist(String loginName);
 
 }

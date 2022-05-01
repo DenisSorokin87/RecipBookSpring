@@ -9,19 +9,27 @@ import java.util.List;
 public class RecipesIDsConverter implements AttributeConverter<List<Integer>, String> {
     @Override
     public String convertToDatabaseColumn(List<Integer> integers) {
-        StringBuilder str = new StringBuilder();
-        for(int i: integers){
-            str.append(i).append(",");
+        if (integers.isEmpty()) return "";
+        else {
+            StringBuilder str = new StringBuilder();
+            for (int i : integers) {
+                str.append(i).append(",");
+            }
+            return str.toString();
         }
-        return str.toString();
     }
 
     @Override
     public List<Integer> convertToEntityAttribute(String s) {
         List<Integer> integerList = new ArrayList<>();
-       for(String el: s.split(",")){
-           integerList.add(Integer.parseInt(el));
-       }
-       return integerList;
+        if (s.isEmpty()) { return integerList;
+        }
+        else {
+            for (String el : s.split(",")) {
+                integerList.add(Integer.parseInt(el));
+            }
+        }
+        return integerList;
     }
+
 }

@@ -21,8 +21,13 @@ public class UserLogic {
     }
 
     public ResponseEntity<HttpStatus> updateUser(User user){
-        if(userDB.saveUser(user)) return new ResponseEntity<>(HttpStatus.OK);
-        else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        try {
+            userDB.saveUser(user);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public void addAll(ArrayList<User> usersList) {
