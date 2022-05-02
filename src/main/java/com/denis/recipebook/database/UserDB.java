@@ -4,7 +4,6 @@ import com.denis.recipebook.beans.User;
 import com.denis.recipebook.repositoresies.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -16,7 +15,7 @@ public record UserDB(UserRepository userRepository) {
     }
 
     public Optional<User> getUser(long id) {
-        return userRepository.findById((long) id);
+        return userRepository.findById(id);
     }
 
 
@@ -25,7 +24,7 @@ public record UserDB(UserRepository userRepository) {
 
     }
 
-    public User makeLogin(String loginName, String password) throws Exception {
+    public User makeLogin(String loginName, String password) {
         return userRepository.makeLogin(loginName, password);
     }
 

@@ -1,6 +1,7 @@
 package com.denis.recipebook.beans;
 
 import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @ToString
 @Entity
+@DynamicUpdate
 public class Ingredient {
 
     @Id

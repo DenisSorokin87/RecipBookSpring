@@ -3,34 +3,37 @@ package com.denis.recipebook.logic;
 
 import com.denis.recipebook.beans.User;
 import com.denis.recipebook.database.UserDB;
+import com.denis.recipebook.response.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Optional;
 
-public class UserLogic {
+@Component
+public record UserLogic(UserDB userDB) {
 
     @Autowired
-    private UserDB userDB;
-
-    public ResponseEntity<User> getUser(long id){
-        Optional<User> user = userDB.getUser(id);
-        return user.map(value -> new ResponseEntity<>(value, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    public UserLogic {
     }
 
-    public ResponseEntity<HttpStatus> updateUser(User user){
+    public Response<User> getUser(long id) {
+        Optional<User> user = userDB.getUser(id);
+        if (user.isEmpty()) return new Response<>("User Not Found", new Exception("User not found or bad reqest"));
+        else return new Response<>(user.get(), "User Found");
+    }
+
+    public Response<User> updateUser(User user) {
         try {
-            userDB.saveUser(user);
-            return new ResponseEntity<>(HttpStatus.OK);
+
+            return new Response<>(userDB.saveUser(user), "User Updated");
         } catch (Exception e) {
-            e.printStackTrace();
+            return new Response<>("Exception Caught", e);
         }
-        return null;
     }
 
     public void addAll(ArrayList<User> usersList) {
         userDB.saveAll(usersList);
     }
+
 }

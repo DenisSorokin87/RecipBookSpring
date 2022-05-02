@@ -3,9 +3,8 @@ package com.denis.recipebook.logic;
 import com.denis.recipebook.beans.LoggedInUser;
 import com.denis.recipebook.beans.User;
 import com.denis.recipebook.database.UserDB;
+import com.denis.recipebook.response.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -16,32 +15,30 @@ public record LoginLogic(UserDB userDB) {
     }
 
 
-    public ResponseEntity<LoggedInUser> makeLogin(String loginName, String password) {
+    public Response<LoggedInUser> makeLogin(String loginName, String password) {
 
         try {
             User user = userDB.makeLogin(loginName, password);
-            return new ResponseEntity<>(new LoggedInUser((long) user.getUserId(), user.getName() + " " + user.getLastName()), HttpStatus.OK);
+            return new Response<>(new LoggedInUser((long) user.getUserId(), user.getName() + " " + user.getLastName()), "Login Successful");
+
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new Response<>("Login Failed, Please check your Login and Password", e);
         }
 
     }
 
-    public ResponseEntity<User> createUser(User user) throws Exception {
+    public Response<User> createUser(User user) throws Exception {
 
-//        try {
-            if (userDB.isUserExist(user.getLoginName())) {
-                return new ResponseEntity<>(HttpStatus.IM_USED);
-            } else {
-                return new ResponseEntity<>(userDB.saveUser(user), HttpStatus.OK);
-            }
-//        }
-//        catch (Exception e) {
-//            return new ResponseEntity<>( HttpStatus.METHOD_NOT_ALLOWED);
-//        }
+        if (userDB.isUserExist(user.getLoginName())) {
+            return new Response<>("User With This Login IS already Exist", new Exception("User With This Login IS already Exist"));
+        } else {
+            return new Response<>(userDB.saveUser(user), "User Created");
+        }
     }
 
-    public Boolean isUserExist(String loginName) {
-        return userDB.isUserExist(loginName);
+    public Response<Boolean> isUserExist(String loginName) {
+        if (userDB.isUserExist(loginName))
+            return new Response<>(Boolean.TRUE, "User with This Login Name is Already Exist");
+        else return new Response<>(false, "You can use this LogIn name");
     }
 }

@@ -3,8 +3,8 @@ package com.denis.recipebook.api;
 
 import com.denis.recipebook.beans.Recipe;
 import com.denis.recipebook.logic.RecipeLogic;
+import com.denis.recipebook.response.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,17 +18,17 @@ public record RecipeAPI(RecipeLogic recipeLogic) {
     }
 
     @GetMapping("/getAll")
-    public ResponseEntity<List<Recipe>> getAllRecipes() {
+    public Response<List<Recipe>> getAllRecipes() {
         return recipeLogic.getAllRecipes();
     }
 
     @PostMapping("/addNew")
-    public ResponseEntity<Recipe> addNewRecipe(@RequestBody Recipe recipe) {
+    public Response<Recipe> addNewRecipe(@RequestBody Recipe recipe) {
         return recipeLogic.addRecipe(recipe);
     }
 
     @PostMapping("/addAll")
-    public ResponseEntity<List<Recipe>> addAllRecipes(@RequestBody List<Recipe> recipeList){
+    public Response<List<Recipe>> addAllRecipes(@RequestBody List<Recipe> recipeList) {
         return recipeLogic.addAllRecipes(recipeList);
     }
 
