@@ -22,7 +22,7 @@ public record LoginLogic(UserDB userDB) {
             return new Response<>(new LoggedInUser((long) user.getUserId(), user.getName() + " " + user.getLastName()), "Login Successful");
 
         } catch (Exception e) {
-            return new Response<>("Login Failed, Please check your Login and Password", e);
+            return new Response<>(e.getMessage());
         }
 
     }
@@ -30,7 +30,7 @@ public record LoginLogic(UserDB userDB) {
     public Response<User> createUser(User user) throws Exception {
 
         if (userDB.isUserExist(user.getLoginName())) {
-            return new Response<>("User With This Login IS already Exist", new Exception("User With This Login IS already Exist"));
+            return new Response<>("User With This Login IS already Exist");
         } else {
             return new Response<>(userDB.saveUser(user), "User Created");
         }

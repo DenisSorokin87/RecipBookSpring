@@ -49,7 +49,7 @@ public class Check {
 
 //        userRepository.save(user);
 
-        return new Response<List<Recipe>>((List<Recipe>) recipeRepository.findAll(), "Request Successful", null);
+        return new Response<>((List<Recipe>) recipeRepository.findAll(), "Request Successful");
 
     }
 

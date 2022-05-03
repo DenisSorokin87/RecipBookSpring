@@ -2,7 +2,6 @@ package com.denis.recipebook.api;
 
 import com.denis.recipebook.beans.Recipe;
 import com.denis.recipebook.beans.User;
-import com.denis.recipebook.logic.RecipeLogic;
 import com.denis.recipebook.logic.UserLogic;
 import com.denis.recipebook.response.Response;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -19,7 +19,7 @@ public record UserLogic(UserDB userDB) {
 
     public Response<User> getUser(long id) {
         Optional<User> user = userDB.getUser(id);
-        if (user.isEmpty()) return new Response<>("User Not Found", new Exception("User not found or bad reqest"));
+        if (user.isEmpty()) return new Response<>("User Not Found");
         else return new Response<>(user.get(), "User Found");
     }
 
@@ -28,7 +28,7 @@ public record UserLogic(UserDB userDB) {
 
             return new Response<>(userDB.saveUser(user), "User Updated");
         } catch (Exception e) {
-            return new Response<>("Exception Caught", e);
+            return new Response<>(e.getMessage());
         }
     }
 

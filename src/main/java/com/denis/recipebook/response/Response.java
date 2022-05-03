@@ -1,8 +1,9 @@
 package com.denis.recipebook.response;
 
-import lombok.*;
-
-import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -12,16 +13,8 @@ public class Response<T> {
 
     private T data;
     private String msg;
-    private Exception e;
 
-
-    public Response(T data, String msg) {
-        this.data = data;
+    public Response(String msg) {
         this.msg = msg;
-    }
-
-    public Response(String msg, Exception e) {
-        this.msg = msg;
-        this.e = e;
     }
 }

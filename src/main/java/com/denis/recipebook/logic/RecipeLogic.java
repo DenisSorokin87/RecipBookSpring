@@ -20,7 +20,7 @@ public record RecipeLogic(RecipeDb recipeDb) implements RecipeLogicInterface {
         try {
             return new Response<>(recipeDb.getAllRecipes(), "Request successful");
         } catch (Exception e) {
-            return new Response<>("Exception Caught", e);
+            return new Response<>(e.getMessage());
         }
     }
 
@@ -29,7 +29,7 @@ public record RecipeLogic(RecipeDb recipeDb) implements RecipeLogicInterface {
         try {
             return new Response<>(recipeDb.addNewRecipe(recipe), "Recipes Added");
         } catch (Exception e) {
-            return new Response<>("Exception Caught", e);
+            return new Response<>(e.getMessage());
         }
     }
 
@@ -38,7 +38,7 @@ public record RecipeLogic(RecipeDb recipeDb) implements RecipeLogicInterface {
         try {
             return new Response<>((List<Recipe>) recipeDb.addAll(recipeList), "All Recipes Added to DB");
         } catch (Exception e) {
-            return new Response<>("Exception Caught", e);
+            return new Response<>(e.getMessage());
         }
 
     }
